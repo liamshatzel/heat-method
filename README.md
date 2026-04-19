@@ -1,6 +1,8 @@
 # The Heat Method for Distance Computation
 
-This project implements the heat method for distance computation outlined in the paper *The Heat Method for Distance Computation* by Crane et. al. The code is structured similarly to the heat method algorithm described in the paper:
+
+
+This project implements the heat method for distance computation outlined in the paper *The Heat Method for Distance Computation* by Crane et. al. Specifically, this project focuses on the implementation for the method over **triangle meshes**. The code is structured similarly to the heat method algorithm described in the paper:
 
 1. Integrate the heat flow $\dot{u} = \Delta u$ for some fixed time $t$
 2. Evaluate the vector field $X = - \nabla u / | \nabla u|$
@@ -13,6 +15,19 @@ The main function that computes these steps is `compute_heat_flow(mesh, starting
 
 `starting_point` is an int, representing the starting vertex of the heat flow.
 
+## Getting Started
+
+* Setup a python venv: `python3 -m venv venv`
+
+* Activate venv: `source venv/bin/activate`
+
+* Install the requirements: `pip install -r requirements.txt`
+
+* Open jupyter lab from terminal: `jupyter lab`
+
+* Run all cells in the notebook! :)
+
+
 ## Code Overview
 
 First the mesh is cleaned by removing any artifacts outside of the biggest component.
@@ -22,11 +37,11 @@ For step 1 `integrate_heat_flow()` is called. This function returns $L_C$ and $\
 
 $$(L_u)_i = \frac{1}{2A_i} \sum_j (\cot \alpha_{ij} + \cot \beta_ij) (u_j - u_i)$$
 
-$L_C$ is the sum of $(\cot \alpha_{ij} + \cot \beta_{ij})$ taken over the neighboring vertices of vertex $i$. This is implemented as an $\mathbb{R}^{|V| \times |V|}$ sparse matrix where each entry $(i, j)$ holds the angle of $i$'s neighbor $j$. Similarly $A_i$ becomes a diagonal mass matrix $A$, which holds $\dfrac{1}{3}$ the sum of the neigboring faces to vertex $i$ at $(i, i)$ (this approximates the area of the mesh as each triangle has three vertices) $A \in \mathbb{R}^{|V| \times |V|}$.
+$L_C$ is the sum of $(\cot \alpha_{ij} + \cot \beta_{ij})$ taken over the neighboring vertices of vertex $i$. This is implemented as an $\mathbb{R}^{|V| \times |V|}$ sparse matrix where each entry $(i, j)$ holds the angle of $i$'s neighbor $j$. Similarly $A_i$ becomes a diagonal mass matrix $A \in \mathbb{R}^{|V| \times |V|}$, which holds $\dfrac{1}{3}$ the sum of the neigboring faces to vertex $i$ at $(i, i)$ (this approximates the area of the mesh as each triangle has three vertices).
 
 
 
-$\textbf{u}$ is computed by solving: $$(A - t L_C)\textbf{u} = \delta_\gamma$$
+Then, $\textbf{u}$ is computed by solving: $$(A - t L_C)\textbf{u} = \delta_\gamma$$
 
 Timestep $t$ is equal to $h^2$ with $h$ being the average edge length of the mesh (this was found to be a good estimate for $t$ in the paper). 
 
