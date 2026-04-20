@@ -1,8 +1,6 @@
 # The Heat Method for Distance Computation
 
-
-
-This project implements the heat method for distance computation outlined in the paper *The Heat Method for Distance Computation* by Crane et. al. Specifically, this project focuses on the implementation for the method over **triangle meshes**. The code is structured similarly to the heat method algorithm described in the paper:
+This project implements the heat method for distance computation outlined in the paper *The Heat Method for Distance Computation* by Crane et. al [1]. Specifically, this project focuses on the implementation for the method over **triangle meshes**. The code is structured similarly to the heat method algorithm described in the paper:
 
 1. Integrate the heat flow $\dot{u} = \Delta u$ for some fixed time $t$
 2. Evaluate the vector field $X = - \nabla u / | \nabla u|$
@@ -64,6 +62,7 @@ Using the $X_j$ computed above, each face $j$ incident on the current vertex $i$
 
 $b$ is a vector $\in \mathbb{R}^{|V|}$ made up of each $\nabla X$ computed in step 2. Similarly, $L_C$ is the matrix from above.
 
+
 # Results:
 
 ### Stanford bunny with starting point at vertex 100
@@ -74,3 +73,6 @@ $b$ is a vector $\in \mathbb{R}^{|V|}$ made up of each $\nabla X$ computed in st
 
 ### Cat with starting point at vertex 100
 ![](images/cat.png)
+
+# References:
+[1] “The heat method for distance computation | Communications of the ACM.” Accessed: Apr. 19, 2026. [Online]. Available: https://dl-acm-org.ezproxy.library.uvic.ca/doi/abs/10.1145/3131280
